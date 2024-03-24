@@ -2,6 +2,7 @@ from keras.preprocessing import image
 from keras.preprocessing.image import ImageDataGenerator
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 img = image.load_img('./train/cat.jpg', target_size=(200,200))
 
@@ -16,17 +17,22 @@ datagen = ImageDataGenerator(
     )
 
 img = image.img_to_array(img)
-print(img.shape)
+#print(img.shape)
 
 input_batch = img.reshape(1,200,200,3)
 
 i=0
-# flow --- for single img
-# flow_from_dir ---- multiple img in dir
+print('Generating data...')
+time.sleep(3)
+print('done')
+
+#flow --- for single img
+#flow_from_dir ---- multiple img in dir
 for output in datagen.flow(input_batch, batch_size=1, save_to_dir='aug'):
     i+=1
     if i==10:
         break
+
 
 
 
